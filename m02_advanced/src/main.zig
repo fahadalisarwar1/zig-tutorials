@@ -42,9 +42,58 @@ pub fn main() !void {
 
     const maybe_error: FileError!u16 = 10;
     print("maybe_error = {any}\n", .{maybe_error});
+
+
+    // lets take a deep look at pointers
+
 }
 test "testing_error" {
         // failing error
     var err = error.oops;
     try expect(err == failing_function());
+}
+
+fn increment_by_5(num: *u32)void{
+    num.* += 5;
+}
+test "testing_pointers"{
+    var x: u32 = 23;
+    increment_by_5(&x);
+    print("{}",.{x});
+    try expect( x==28);
+
+}
+
+
+test "methods_on_enums"{
+    const Clothes = enum{
+        sweatpants,
+        trousers,
+        coat,
+
+        fn is_coat(self: @This())bool{
+            return self == @This().coat;
+        }
+    };
+    var myclothes = Clothes.coat;
+    try expect(myclothes.is_coat() == true);
+}
+
+test "swapping_struct_fields"{
+    const Numbers = struct {
+        x: u32,
+        y: u32,
+        fn swap_values(self: *@This()) void {
+            var temp = self.x;
+            self.x = self.y;
+            self.y = temp;
+        }
+    };
+    var nums: Numbers = Numbers{
+        .x=20,
+        .y=24
+    };
+    nums.swap_values();
+    print("x= {}, y= {}\n", .{nums.x, nums.y});
+    try expect(nums.x == 24);
 }
