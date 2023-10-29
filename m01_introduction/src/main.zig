@@ -158,7 +158,18 @@ pub fn main() void {
     print("{}\n", .{ptr_tt});
 
     // lets see pointer to arrays
+
+
+    var arr = [_]u8{1, 6, 8,9,7,8};
     
+    var ptr_arr = &arr;
+    ptr_arr.*[3]=34;
+    ptr_arr[1]=11; // both are correct
+    for (arr)|i|{
+        print("{} ", .{i});
+    }
+
+
 
 }
 
