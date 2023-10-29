@@ -132,6 +132,33 @@ pub fn main() void {
 
     print("sum = {}\n", .{sum});
 
+    // OOP
+    //onst Rectangl = struct{};
+    const Rectangl = struct {
+        width: f32,
+        height: f32,
+
+        pub fn calculate_area(self: @This()) f32{
+            return self.width * self.height;
+            
+        }
+    };
+    var r: Rectangl = Rectangl{
+        .width=34.5,
+        .height=23.66
+    };
+    print("area is {}\n", .{r.calculate_area()});
+
+ 
+    // pointers
+    var tt: u8 = 20;
+    var ptr_tt = &tt;
+    ptr_tt.* = 34; // in C it would be *ptr_tt
+    print("{}\n", .{tt});
+    print("{}\n", .{ptr_tt});
+
+    // lets see pointer to arrays
     
+
 }
 
