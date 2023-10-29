@@ -1,6 +1,11 @@
 const std = @import("std");
 
 const print = std.debug.print;
+const expect = @import("std").testing.expect;
+
+fn failing_function() error{oops}!void{
+    return error.oops;
+}
 
 pub fn main() !void {
 
@@ -37,4 +42,9 @@ pub fn main() !void {
 
     const maybe_error: FileError!u16 = 10;
     print("maybe_error = {any}\n", .{maybe_error});
+}
+test "testing_error" {
+        // failing error
+    var err = error.oops;
+    try expect(err == failing_function());
 }
