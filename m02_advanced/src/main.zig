@@ -1,6 +1,7 @@
 const std = @import("std");
 
 const print = std.debug.print;
+
 pub fn main() !void {
     
     //lets take a look at advanced features of zig. 
@@ -23,4 +24,27 @@ pub fn main() !void {
 
     }
     print("x after leaving block {}\n", .{x});
+
+
+    // ERRORS
+
+    const FileError = error{
+        ACCESS_DENIED,
+        OUT_OF_MEMORY,
+        FILE_NOT_FOUND,
+    };
+    var f_error: FileError = FileError.ACCESS_DENIED;
+    print("error is {}\n",.{f_error});
+
+    //error set
+
+    const maybe_error: FileError!u16 =10;
+    print("maybe_error = {any}\n", .{maybe_error});
+
+
+
+
+    
+
 }
+
